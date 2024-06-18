@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="b1a091a" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.5.0" camunda:diagramRelationId="b259d2a7-5673-46a9-8ec9-eb8c3db24bf5">
+  <bpmn:process id="Process_KafkaSaas-to-CamundaSaaS-Directly" name="KafkaSaas-to-CamundaSaaS-Directly" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Reacting on Kafka message in Camunda shall be demonstrated">
+      <bpmn:outgoing>Flow_08vxbln</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_08vxbln" sourceRef="StartEvent_1" targetRef="Event_1if21fu" />
+    <bpmn:endEvent id="Event_08fivk7" name="Reacting on Kafka message in Camunda demonstrated">
+      <bpmn:incoming>Flow_11mczdh</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_11mczdh" sourceRef="Event_1if21fu" targetRef="Event_08fivk7" />
+    <bpmn:intermediateCatchEvent id="Event_1if21fu" name="Wait for Kafka message" zeebe:modelerTemplate="io.camunda.connectors.inbound.KafkaIntermediate.v1" zeebe:modelerTemplateVersion="4" zeebe:modelerTemplateIcon="data:image/svg+xml;utf8,%3Csvg width=&#39;18&#39; height=&#39;18&#39; viewBox=&#39;0 0 256 416&#39; xmlns=&#39;http://www.w3.org/2000/svg&#39; preserveAspectRatio=&#39;xMidYMid&#39;%3E%3Cpath d=&#39;M201.816 230.216c-16.186 0-30.697 7.171-40.634 18.461l-25.463-18.026c2.703-7.442 4.255-15.433 4.255-23.797 0-8.219-1.498-16.076-4.112-23.408l25.406-17.835c9.936 11.233 24.409 18.365 40.548 18.365 29.875 0 54.184-24.305 54.184-54.184 0-29.879-24.309-54.184-54.184-54.184-29.875 0-54.184 24.305-54.184 54.184 0 5.348.808 10.505 2.258 15.389l-25.423 17.844c-10.62-13.175-25.911-22.374-43.333-25.182v-30.64c24.544-5.155 43.037-26.962 43.037-53.019C124.171 24.305 99.862 0 69.987 0 40.112 0 15.803 24.305 15.803 54.184c0 25.708 18.014 47.246 42.067 52.769v31.038C25.044 143.753 0 172.401 0 206.854c0 34.621 25.292 63.374 58.355 68.94v32.774c-24.299 5.341-42.552 27.011-42.552 52.894 0 29.879 24.309 54.184 54.184 54.184 29.875 0 54.184-24.305 54.184-54.184 0-25.883-18.253-47.553-42.552-52.894v-32.775a69.965 69.965 0 0 0 42.6-24.776l25.633 18.143c-1.423 4.84-2.22 9.946-2.22 15.24 0 29.879 24.309 54.184 54.184 54.184 29.875 0 54.184-24.305 54.184-54.184 0-29.879-24.309-54.184-54.184-54.184zm0-126.695c14.487 0 26.27 11.788 26.27 26.271s-11.783 26.27-26.27 26.27-26.27-11.787-26.27-26.27c0-14.483 11.783-26.271 26.27-26.271zm-158.1-49.337c0-14.483 11.784-26.27 26.271-26.27s26.27 11.787 26.27 26.27c0 14.483-11.783 26.27-26.27 26.27s-26.271-11.787-26.271-26.27zm52.541 307.278c0 14.483-11.783 26.27-26.27 26.27s-26.271-11.787-26.271-26.27c0-14.483 11.784-26.27 26.271-26.27s26.27 11.787 26.27 26.27zm-26.272-117.97c-20.205 0-36.642-16.434-36.642-36.638 0-20.205 16.437-36.642 36.642-36.642 20.204 0 36.641 16.437 36.641 36.642 0 20.204-16.437 36.638-36.641 36.638zm131.831 67.179c-14.487 0-26.27-11.788-26.27-26.271s11.783-26.27 26.27-26.27 26.27 11.787 26.27 26.27c0 14.483-11.783 26.271-26.27 26.271z&#39; style=&#39;fill:%23231f20&#39;/%3E%3C/svg%3E">
+      <bpmn:extensionElements>
+        <zeebe:properties>
+          <zeebe:property name="inbound.type" value="io.camunda:connector-kafka-inbound:1" />
+          <zeebe:property name="authenticationType" value="credentials" />
+          <zeebe:property name="authentication.username" value="{{secrets.KAFKA-USERNAME}}" />
+          <zeebe:property name="authentication.password" value="{{secrets.KAFKA-PASSWORD}}" />
+          <zeebe:property name="topic.bootstrapServers" value="powerful-spaniel-12322-eu2-kafka.upstash.io:9092" />
+          <zeebe:property name="topic.topicName" value="integration_topic" />
+          <zeebe:property name="additionalProperties" value="={&#10;  &#34;sasl.mechanism&#34;:&#34;SCRAM-SHA-256&#34;,&#10;  &#34;security.protocol&#34;:&#34;SASL_SSL&#34;,&#10;  &#34;sasl.jaas.config&#34;:&#34;org.apache.kafka.common.security.scram.ScramLoginModule required username=\&#34;cG93ZXJmdWwtc3BhbmllbC0xMjMyMiQ05wbgy_Zyx08dKsCIdkIqshwRGKrv0oU\&#34; password=\&#34;MTZiMDYyZTEtZDY1Yy00MjUxLWIxMDktOWZjYmYxM2IxMmYx\&#34;;&#34;&#10;}" />
+          <zeebe:property name="autoOffsetReset" value="latest" />
+          <zeebe:property name="correlationKeyExpression" value="=value.orderId" />
+          <zeebe:property name="resultVariable" value="kafkaInboundResultVar" />
+          <zeebe:property name="resultExpression" />
+        </zeebe:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_08vxbln</bpmn:incoming>
+      <bpmn:outgoing>Flow_11mczdh</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0oofkbt" messageRef="Message_0khhqeg" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:textAnnotation id="TextAnnotation_1b6o5nc">
+      <bpmn:text>For demo start with:
+{"orderId":"4711"}</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_16k7kjl" associationDirection="None" sourceRef="StartEvent_1" targetRef="TextAnnotation_1b6o5nc" />
+  </bpmn:process>
+  <bpmn:message id="Message_0khhqeg" name="73a4429b-f1d8-4eeb-a196-fd145ecbce28" zeebe:modelerTemplate="io.camunda.connectors.inbound.KafkaIntermediate.v1">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=orderId" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:message id="Message_07pa7mi" name="Message_07pa7mi" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_KafkaSaas-to-CamundaSaaS-Directly">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="150" y="160" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="124" y="203" width="89" height="53" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_08fivk7_di" bpmnElement="Event_08fivk7">
+        <dc:Bounds x="482" y="160" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="462" y="203" width="76" height="53" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0u33s10_di" bpmnElement="Event_1if21fu">
+        <dc:Bounds x="312" y="160" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="296" y="203" width="69" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1b6o5nc_di" bpmnElement="TextAnnotation_1b6o5nc">
+        <dc:Bounds x="170" y="80" width="199.99999999999997" height="39.99704491725768" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_08vxbln_di" bpmnElement="Flow_08vxbln">
+        <di:waypoint x="186" y="178" />
+        <di:waypoint x="312" y="178" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11mczdh_di" bpmnElement="Flow_11mczdh">
+        <di:waypoint x="348" y="178" />
+        <di:waypoint x="482" y="178" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_16k7kjl_di" bpmnElement="Association_16k7kjl">
+        <di:waypoint x="178" y="163" />
+        <di:waypoint x="204" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
